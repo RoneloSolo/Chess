@@ -1,7 +1,5 @@
 #include "Game.hpp"
-
 #include "Board.hpp"
-#include <raylib.h>
 
 #define MAX(a, b) ((a)>(b)? (a) : (b))
 #define MIN(a, b) ((a)<(b)? (a) : (b))
@@ -9,6 +7,8 @@
 static RenderTexture2D target;
 static Vector2 windowSize;
 static Vector2 gameSize;
+
+static Board* board = new Board();
 
 static float scale;
 
@@ -19,7 +19,7 @@ Game::Game(int width, int height, const char* title) {
     InitWindow(width, height, title);
     SetWindowMinSize(320, 240);
 
-    pieceTexture = LoadTexture("sprite/pieces.png"); 
+    board->pieceTexture = LoadTexture("sprite/pieces.png"); 
 
     windowSize = Vector2{(float)width, (float)height};
     gameSize = windowSize;
@@ -30,7 +30,9 @@ Game::Game(int width, int height, const char* title) {
 
     scale = MIN(windowSize.x/gameSize.x, windowSize.y/gameSize.y);
     
-    GenerateBoard(gameSize.x, gameSize.y);
+    board->ChangeGameSize(gameSize);
+    board->LoadBoard();
+    board->LoadPieces();
 }
 
 Game::~Game() noexcept {
@@ -46,8 +48,8 @@ void Game::Draw() {
     BeginTextureMode(target);
         ClearBackground(BLACK);
     
-        DrawBoard();
-        DrawPieces();
+        board->DrawBoard();
+        board->DrawPieces();
 
     EndTextureMode();
     
@@ -67,11 +69,7 @@ void Game::Update() {
     }
 }
 
-void Game::PhysicsUpdate(){
-}
-
 void Game::Tick() {
     Update();
-    PhysicsUpdate();
     Draw();
 }

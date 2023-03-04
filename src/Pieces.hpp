@@ -7,6 +7,3 @@ struct Piece {
     int y;
     int id;
 };
-
-static int PIECE_SIZE = 125;
-static Texture2D pieceTexture;

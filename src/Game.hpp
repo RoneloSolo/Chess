@@ -1,4 +1,5 @@
 #pragma  once
+#include <memory> 
 
 class Game {
     public:
@@ -9,5 +10,4 @@ class Game {
     private:
         void Draw();
         void Update();
-        void PhysicsUpdate();
 };
