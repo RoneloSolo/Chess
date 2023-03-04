@@ -5,7 +5,7 @@
       "request": "launch",
       "name": "Run",
       "type": "cppdbg",
-      "program": "${workspaceFolder}/build/GameName",
+      "program": "${workspaceFolder}/build/Chess",
       "args": [],
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "make_file"
