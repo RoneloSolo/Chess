@@ -3,7 +3,7 @@
 
 // x, y, id = id is type of piece like pawn rock king etc.
 struct Piece {
-    int x;
-    int y;
-    int id;
+    unsigned short x;
+    unsigned short y;
+    unsigned char id;
 };

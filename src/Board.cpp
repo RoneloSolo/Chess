@@ -22,9 +22,9 @@ void Board::LoadPieces() {
     std::string delimiter = "/";
     size_t pos = 0;
     std::string token;
-    int coll = 0;
-    int row = 8;
-    int i = 0;
+    unsigned char coll = 0;
+    unsigned char row = 8;
+    unsigned char i = 0;
 
     while ((pos = fen.find(delimiter)) != std::string::npos) {
         token = fen.substr(0, pos);
@@ -32,8 +32,8 @@ void Board::LoadPieces() {
             if(isdigit(t)) {
                 coll += (int)t;
             } else {
-                int pieceColor = (isupper(t)) ? WHITE_PIECE : BLACK_PIECE;
-                int pieceType = ToType(tolower(t));
+                unsigned short pieceColor = (isupper(t)) ? WHITE_PIECE : BLACK_PIECE;
+                unsigned short pieceType = ToType(tolower(t));
 
                 pieces[i].id = pieceColor | pieceType;
                 pieces[i].x = coll * PIECE_SIZE + gameSize.x / 2 - PIECE_SIZE*8/2;
@@ -50,9 +50,9 @@ void Board::LoadPieces() {
 }
 
 void Board::LoadBoard() {
-    for(int i = 0; i < 64; i++) {
-        int x = i / 8;
-        int y = i % 8;
+    for(unsigned char i = 0; i < 64; i++) {
+        unsigned short x = i / 8;
+        unsigned short y = i % 8;
 
         if((x + y) % 2 == 0) boardPieces[i].isWhite = true;
         else boardPieces[i].isWhite = false;
@@ -67,7 +67,7 @@ void Board::LoadBoard() {
 
 void Board::DrawBoard() {
     Color color;
-    for(int i = 0; i < 64; i++) {
+    for(unsigned char i = 0; i < 64; i++) {
         if(boardPieces[i].isWhite) color = WHITE;
         else color = GRAY;
         DrawRectangle(boardPieces[i].x, boardPieces[i].y, PIECE_SIZE, PIECE_SIZE, color);
@@ -75,10 +75,10 @@ void Board::DrawBoard() {
 }
 
 void Board::DrawPieces() {
-    int amountOfPieces = sizeof(pieces)/sizeof(pieces[0]);
-    int x = 0;
-    int y = 0;
-    for (int i = 0; i < amountOfPieces; i++) {
+    unsigned char amountOfPieces = sizeof(pieces)/sizeof(pieces[0]);
+    unsigned short x = 0;
+    unsigned short y = 0;
+    for (unsigned char i = 0; i < amountOfPieces; i++) {
         x = PIECE_SIZE;
         y = PIECE_SIZE;
 
@@ -133,7 +133,6 @@ void Board::DrawPieces() {
                 y *= 1;
                 break;
         }
-        std::cout << pieces[i].x << std::endl;
 
         DrawTextureRec(pieceTexture, Rectangle{(float)x, (float)y, (float)PIECE_SIZE, (float)PIECE_SIZE}, Vector2{(float)pieces[i].x, (float)pieces[i].y}, WHITE);
     }

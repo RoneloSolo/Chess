@@ -6,8 +6,8 @@
 #include <memory> 
 
 struct BoardPiece {
-    int x;
-    int y;
+    unsigned short x;
+    unsigned short y;
     bool isWhite;
 };
 
@@ -38,5 +38,5 @@ class Board {
         BoardPiece boardPieces[64];
         Piece pieces[32];
         std::string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
-        const int PIECE_SIZE = 125;
+        const unsigned char PIECE_SIZE = 125;
 };
